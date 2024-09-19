@@ -34,13 +34,13 @@ public class SearchActivity extends AppCompatActivity {
             String location = locationInput.getText().toString();
             Cursor cursor = db.searchDonors(bloodGroup, location);
 
-            if (cursor.getCount() > 0) {
+            if (cursor != null && cursor.getCount() > 0) {
                 String[] from = {"name", "phone"};
                 int[] to = {R.id.donor_name, R.id.donor_phone};
-                SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.donor_list, cursor, from, to, 0);
+                SimpleCursorAdapter adapter = new SimpleCursorAdapter(SearchActivity.this, R.layout.donor_list, cursor, from, to, 0);
                 listView.setAdapter(adapter);
             } else {
-                Toast.makeText(this, "No donors found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this, "No donors found", Toast.LENGTH_SHORT).show();
             }
         });
     }

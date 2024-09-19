@@ -65,7 +65,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Search donors
     public Cursor searchDonors(String bloodGroup, String location) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_DONORS + " WHERE blood_group = ? AND location = ?", new String[]{bloodGroup, location});
+        Cursor cursor = db.rawQuery("SELECT id as _id, name, phone FROM " + TABLE_DONORS + " WHERE blood_group = ? AND location = ?", new String[]{bloodGroup, location});
+        if (cursor != null && cursor.moveToFirst()) {
+            return cursor;
+        }
+        return null;
     }
 
     // Update donor profile
@@ -86,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Get donor by ID
     public Donor getDonorById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DONORS + " WHERE " + COL_ID + " = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT id as _id, name, phone FROM " + TABLE_DONORS + " WHERE " + COL_ID + " = ?", new String[]{String.valueOf(id)});
 
         if (cursor != null && cursor.moveToFirst()) {
             Donor donor = new Donor();
