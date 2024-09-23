@@ -12,8 +12,8 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private EditText nameInput, emailInput, phoneInput, bloodGroupInput, locationInput, passwordInput;
     private Button btnUpdate;
     DatabaseHelper db;
+    String email;
     int donorId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +23,13 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         // Get donor id from intent (assuming donor id is passed from previous activity)
-        donorId = getIntent().getIntExtra("DONOR_ID", -1);
-        if (donorId == -1) {
+        email = getIntent().getStringExtra("Email");
+        if (email == null) {
             Toast.makeText(this, "Invalid donor", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
+
 
         // Initialize UI elements
         nameInput = findViewById(R.id.name);
@@ -63,8 +64,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     // Load donor data from the database and set it to the EditText fields
     private void loadDonorData() {
-        Donor donor = db.getDonorById(donorId);
+        Donor donor = db.getDonorByEmail(email);
         if (donor != null) {
+            donorId = donor.getId();
             nameInput.setText(donor.getName());
             emailInput.setText(donor.getEmail());
             phoneInput.setText(donor.getPhone());

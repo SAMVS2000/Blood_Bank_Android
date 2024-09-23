@@ -107,6 +107,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return null; // Donor not found
         }
     }
+    public Donor getDonorByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DONORS + " WHERE " + COL_EMAIL + " = ?", new String[]{String.valueOf(email)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Donor donor = new Donor();
+            donor.setId(cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)));
+            donor.setName(cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME)));
+            donor.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL)));
+            donor.setPhone(cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE)));
+            donor.setBloodGroup(cursor.getString(cursor.getColumnIndexOrThrow(COL_BLOOD_GROUP)));
+            donor.setLocation(cursor.getString(cursor.getColumnIndexOrThrow(COL_LOCATION)));
+            donor.setPassword(cursor.getString(cursor.getColumnIndexOrThrow(COL_PASSWORD)));
+            cursor.close();
+            return donor;
+        } else {
+            return null; // Donor not found
+        }
+    }
 
 
 }

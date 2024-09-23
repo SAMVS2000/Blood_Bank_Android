@@ -18,7 +18,7 @@ public class SearchActivity extends AppCompatActivity {
     private Button btnSearch;
     private ListView listView;
     DatabaseHelper db;
-
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,11 @@ public class SearchActivity extends AppCompatActivity {
         locationInput = findViewById(R.id.location);
         btnSearch = findViewById(R.id.btnSearch);
         listView = findViewById(R.id.donorList);
+
+        // In SearchActivity's onCreate method
+        Intent intent = getIntent();
+        email = intent.getStringExtra("Email");
+
 
         btnSearch.setOnClickListener(v -> {
             String bloodGroup = bloodGroupInput.getText().toString();
@@ -53,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void updateProfile(View v){
         Intent intent = new Intent(SearchActivity.this, ProfileUpdateActivity.class);
+        intent.putExtra("Email", email);
         startActivity(intent);
         finish();
     }
