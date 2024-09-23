@@ -1,6 +1,8 @@
 package com.example.bloodbank;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -43,5 +45,15 @@ public class SearchActivity extends AppCompatActivity {
                 Toast.makeText(SearchActivity.this, "No donors found", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void logout(View v){
+       finish();
+
+    }
+
+    public void updateProfile(View v){
+        Intent intent = new Intent(SearchActivity.this, ProfileUpdateActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

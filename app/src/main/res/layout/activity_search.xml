@@ -5,6 +5,34 @@
     android:background="@drawable/bback"
     android:padding="16dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="#8E24AA"
+            android:onClick="updateProfile"
+            android:text="update Profile"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="#8E24AA"
+            android:onClick="logout"
+            android:text="logout"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/blood_group"
         android:layout_width="match_parent"

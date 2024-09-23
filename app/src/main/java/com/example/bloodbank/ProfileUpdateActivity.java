@@ -53,7 +53,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
             // Update donor profile in the database
             if (db.updateDonor(donorId, name, email, phone, bloodGroup, location, password)) {
-                Toast.makeText(ProfileUpdateActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileUpdateActivity.this, "Profile updated successfully, you may re-login", Toast.LENGTH_SHORT).show();
                 finish(); // Close the activity after successful update
             } else {
                 Toast.makeText(ProfileUpdateActivity.this, "Profile update failed", Toast.LENGTH_SHORT).show();
